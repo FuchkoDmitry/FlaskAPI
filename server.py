@@ -49,11 +49,21 @@ def handle_invalid_usage(error):
 
 class AdvertisementView(MethodView):
 
-    def get(self):
+    def get(self, adv_id=None):
         with Session() as session:
-            advertisements = session.query(Advertisement).filter_by(deleted=False).all()
-            response = [adv.to_dict() for adv in advertisements]
-            return jsonify(response)
+            if adv_id is None:
+                advertisements = session.query(Advertisement).filter_by(deleted=False).all()
+                response = [adv.to_dict() for adv in advertisements]
+                return jsonify(response)
+            advertisement = session.query(Advertisement).filter(
+                and_(
+                    Advertisement.id == adv_id,
+                    Advertisement.deleted == False
+                )
+            ).first()
+            if advertisement is None:
+                raise HTTPError(400, "Incorrect advertisement ID")
+            return advertisement.to_dict(), 200
 
     @login_required
     def post(self):
@@ -131,7 +141,7 @@ def register():
 app.add_url_rule('/advertisements/', view_func=AdvertisementView.as_view('get_advertisements'), methods=['GET'])
 app.add_url_rule('/advertisements/', view_func=AdvertisementView.as_view('create_advertisement'), methods=['POST'])
 app.add_url_rule('/advertisements/<int:adv_id>/', view_func=AdvertisementView.as_view('patch_advertisement'),
-                 methods=['PATCH', 'DELETE'])
+                 methods=['GET', 'PATCH', 'DELETE'])
 app.add_url_rule('/login/', view_func=login, methods=['POST'])
 app.add_url_rule('/register/', view_func=register, methods=['POST'])
 

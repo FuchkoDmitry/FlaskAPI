@@ -24,6 +24,12 @@ GET http://127.0.0.1:5000/advertisements/
 Content-Type: application/json
 
 ###
+
+# получить объявление
+GET http://127.0.0.1:5000/advertisements/19/
+Content-Type: application/json
+
+###
 # разместить объявление
 POST http://127.0.0.1:5000/advertisements/
 Content-Type: application/json
@@ -36,7 +42,7 @@ Authorization: Token a9ac68ab-6637-4dea-91a8-0625e5f4ece4
 
 ###
 # редатировать объявление
-PATCH http://127.0.0.1:5000/advertisements/21/
+PATCH http://127.0.0.1:5000/advertisements/23/
 Content-Type: application/json
 Authorization: Token a9ac68ab-6637-4dea-91a8-0625e5f4ece4
 
@@ -46,6 +52,6 @@ Authorization: Token a9ac68ab-6637-4dea-91a8-0625e5f4ece4
 
 ###
 # удалить объявление
-DELETE http://127.0.0.1:5000/advertisements/21/
+DELETE http://127.0.0.1:5000/advertisements/23/
 Content-Type: application/json
 Authorization: Token a9ac68ab-6637-4dea-91a8-0625e5f4ece4
