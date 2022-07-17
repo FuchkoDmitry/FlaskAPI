@@ -27,7 +27,6 @@ def load_user_from_request(request):
                 user = session.query(User).filter_by(token=token).first()
                 if user is None:
                     raise HTTPError(401, "invalid token")
-                print(user.advertisements)
                 return user
             except DataError:
                 raise HTTPError(401, "invalid token")
