@@ -1,0 +1,51 @@
+# зарегистрировать нового пользователя
+POST http://127.0.0.1:5000/register/
+Content-Type: application/json
+
+{
+    "user_name": "user_name",
+    "password": "dD2#klnfkgdg&",
+    "email": "example@mail.ru"
+}
+
+###
+# получить токен по имени пользователя и паролю
+POST http://127.0.0.1:5000/login/
+Content-Type: application/json
+
+{
+    "user_name": "user_name",
+    "password": "dD2#klnfkgdg&"
+}
+
+###
+# получить список объявлений
+GET http://127.0.0.1:5000/advertisements/
+Content-Type: application/json
+
+###
+# разместить объявление
+POST http://127.0.0.1:5000/advertisements/
+Content-Type: application/json
+Authorization: Token a9ac68ab-6637-4dea-91a8-0625e5f4ece4
+
+{
+  "title": "advertisement title",
+  "description": "advertisement description"
+}
+
+###
+# редатировать объявление
+PATCH http://127.0.0.1:5000/advertisements/21/
+Content-Type: application/json
+Authorization: Token a9ac68ab-6637-4dea-91a8-0625e5f4ece4
+
+ {
+    "title": "new title"
+  }
+
+###
+# удалить объявление
+DELETE http://127.0.0.1:5000/advertisements/21/
+Content-Type: application/json
+Authorization: Token a9ac68ab-6637-4dea-91a8-0625e5f4ece4
