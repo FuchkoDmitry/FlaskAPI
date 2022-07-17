@@ -1,4 +1,5 @@
 from typing import Union
+import os
 
 from flask import Flask, jsonify, request
 from flask_bcrypt import Bcrypt
@@ -6,12 +7,14 @@ from flask.views import MethodView
 from flask_login import LoginManager, login_required, login_user, current_user
 from sqlalchemy import and_
 from sqlalchemy.exc import DataError
+from dotenv import load_dotenv
 
 
 app = Flask('app')
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
-app.config['SECRET_KEY'] = 'super_SecRetKey345&'
+load_dotenv()
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
 
 @login_manager.request_loader
